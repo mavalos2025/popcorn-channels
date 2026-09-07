@@ -1,0 +1,39 @@
+{
+  "app_name": "Popcorn Play",
+  "version_control": {
+    "latest_version": "1.0.13",
+    "min_required_version": "1.0.0",
+    "force_update": false,
+    "store_url": "https://play.google.com/store/apps/details?id=com.zionixstudio.popcornplay"
+  },
+  "maintenance": {
+    "enabled": false,
+    "title": "Mantenimiento Programado",
+    "message": "Estamos optimizando las señales de transmisión de TV en vivo. El servicio volverá en breve.",
+    "estimated_return": null
+  },
+  "announcement": {
+    "enabled": false,
+    "id": "welcome_banner_v1",
+    "title": "¡Bienvenido a Popcorn Play!",
+    "message": "Disfruta de más de 3,800 canales de televisión en vivo de toda América.",
+    "type": "info",
+    "dismissible": true
+  },
+  "theme": {
+    "primary_color": "#FF3366",
+    "accent_color": "#FFB800",
+    "background_color": "#090B0E"
+  },
+  "player": {
+    "hls_timeout_ms": 12000,
+    "retry_attempts": 3,
+    "user_agent": "Mozilla/5.0 (Linux; Android 14; Mobile; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.6778.260 Mobile Safari/537.36"
+  },
+  "legal": {
+    "disclaimer": "Popcorn Play es un reproductor multimedia y no aloja ni emite contenido propietario. Las transmisiones enlazadas son de libre acceso en internet según el índice público de iptv-org.",
+    "dmca_contact": "contacto@zionixstudio.com",
+    "privacy_policy_url": "https://zionixstudio.com/privacy-popcorn-play.html"
+  },
+  "last_updated": "2026-09-07T20:58:00Z"
+}

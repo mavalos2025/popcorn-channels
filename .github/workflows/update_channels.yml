@@ -1,0 +1,53 @@
+name: Actualización Automática de Canales (Toda América)
+
+on:
+  schedule:
+    # Se ejecuta de forma automática cada 6 horas (a las 00:00, 06:00, 12:00, 18:00 UTC)
+    - cron: '0 */6 * * *'
+  workflow_dispatch: # Permite ejecutarlo manualmente desde la pestaña 'Actions' de GitHub
+
+permissions:
+  contents: write
+
+concurrency:
+  group: channels-sync
+  cancel-in-progress: true
+
+jobs:
+  sync-and-clean:
+    name: Health Check y Publicación de Catálogo
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar repositorio
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Configurar Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 📦 Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install httpx requests
+
+      - name: 🚀 Ejecutar Health Check y Generación de Catálogo
+        run: |
+          python scripts/update_and_publish_catalog.py
+
+      - name: 📤 Guardar y Publicar cambios en GitHub
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "Sin cambios en los canales. Todo al día."
+          else
+            git commit -m "chore(channels): auto-sync América TV catalog & health check [skip ci]"
+            git push origin main
+            echo "✓ Canales actualizados y publicados en GitHub CDN."
+          fi
